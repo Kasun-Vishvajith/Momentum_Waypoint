@@ -18,7 +18,8 @@ Booklet deadline: **Sunday, October 4, 2026 at 11:59 PM Sri Lanka time**. Code p
 
 - [x] Push a GitHub monorepo named `Momentum_Waypoint`.
 - [ ] Deploy the complete system to a public HTTPS URL and verify the deployed walkthrough.
-- [ ] Record/upload a five-to-eight-minute unlisted YouTube video with actual working flows and architecture explanation.
+- [x] Record a narrated local MP4 with all four working roles and architecture explanation (7 minutes 34 seconds, synthetic narration disclosed).
+- [ ] Review and upload the MP4 as a five-to-eight-minute unlisted YouTube video.
 - [ ] Submit repository URL, deployment URL, four account credentials, and YouTube URL through the form.
 - [ ] Keep deployment alive through review and subsequent rounds if advanced.
 
@@ -27,6 +28,8 @@ Repository URL: https://github.com/Kasun-Vishvajith/Momentum_Waypoint
 Public application URL: https://momentum-waypoint.vercel.app — frontend deployed; PostgreSQL connection and live walkthrough verification pending.
 
 Unlisted YouTube URL: **pending**
+
+Local video: `Momentum_Waypoint_Demo.mp4`, delivered alongside the repository ZIP.
 
 Final submitted commit: **pending**
 

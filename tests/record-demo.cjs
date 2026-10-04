@@ -42,6 +42,7 @@ async function at(fraction) {
   await sleep(Math.max(0, start + duration * fraction * 1000 - Date.now()));
 }
 async function scene(id, mobile, fn) {
+  if (process.env.RECORD_CHAPTER && process.env.RECORD_CHAPTER !== id) return;
   const item = scenes.find((s) => s.id === id);
   duration = item.seconds + 2;
   console.log("Recording " + id + " (" + Math.round(duration) + " seconds)");
@@ -97,12 +98,12 @@ function architecture() {
   const code = fs
     .readFileSync(path.join(root, "backend/server.py"), "utf8")
     .split("\n")
-    .slice(104, 126)
+    .slice(106, 123)
     .join("\n")
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;");
-  return `<!doctype html><html><head><style>body{margin:0;background:#f4f7fc;color:#172554;font:18px Arial;padding:44px}h1{font-size:36px;margin:0 0 12px}p{color:#536580;line-height:1.6}h2{font-size:23px}.flow{display:flex;gap:18px;align-items:center;margin:28px 0}.box{background:white;padding:24px;border:1px solid #d8e2f0;border-radius:12px;flex:1}.columns{display:grid;grid-template-columns:1fr 1.15fr;gap:25px}pre{background:#172554;color:#e0eaff;font:14px monospace;padding:20px;border-radius:12px;overflow:auto;line-height:1.55}li{margin:15px 0;line-height:1.45}.check{color:#15803d}small{font-size:14px;color:#536580}</style></head><body><h1>Waypoint · code & architecture</h1><p>The Vercel adapter and Docker service use the same API, SQL schema, and domain commands.</p><div class="flow"><div class="box"><strong>Four role workspaces</strong><p>Store · Dispatcher · Loader · Driver</p></div><span>→</span><div class="box"><strong>Python API</strong><p>Role checks · workflow commands · planning validation</p></div><span>→</span><div class="box"><strong>PostgreSQL</strong><p>Orders · trips · stops · evidence · receipts · audit</p></div></div><div class="columns"><section><h2>Offline lifecycle</h2><ol><li>Service worker caches the application shell.</li><li>IndexedDB persists manifests, drafts, and handovers.</li><li>Each handover has a unique client ID and payload hash.</li><li>The queue removes a record only after server acknowledgment.</li></ol><h2 class="check">Verified</h2><p>11 integration tests, real browser offline reload/reconnect, PostgreSQL workflow, and complete Docker Compose startup.</p><small>Source: backend/server.py · backend/domain.py · api/index.py<br>Documentation: docs/ARCHITECTURE.md · docs/DATA_MODEL.md</small></section><section><h2>Actual API evidence validation</h2><pre>${code}</pre></section></div></body></html>`;
+  return `<!doctype html><html><head><style>body{margin:0;background:#f4f7fc;color:#172554;font:18px Arial;padding:44px}h1{font-size:36px;margin:0 0 12px}p{color:#536580;line-height:1.6}h2{font-size:23px}.flow{display:flex;gap:18px;align-items:center;margin:28px 0}.box{background:white;padding:24px;border:1px solid #d8e2f0;border-radius:12px;flex:1}.columns{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:25px}pre{background:#172554;color:#e0eaff;font:12px monospace;white-space:pre-wrap;overflow-wrap:anywhere;padding:20px;border-radius:12px;overflow:auto;line-height:1.55}li{margin:15px 0;line-height:1.45}.check{color:#15803d}small{font-size:14px;color:#536580}</style></head><body><h1>Waypoint · code & architecture</h1><p>The Vercel adapter and Docker service use the same API, SQL schema, and domain commands.</p><div class="flow"><div class="box"><strong>Four role workspaces</strong><p>Store · Dispatcher · Loader · Driver</p></div><span>→</span><div class="box"><strong>Python API</strong><p>Role checks · workflow commands · planning validation</p></div><span>→</span><div class="box"><strong>PostgreSQL</strong><p>Orders · trips · stops · evidence · receipts · audit</p></div></div><div class="columns"><section><h2>Offline lifecycle</h2><ol><li>Service worker caches the application shell.</li><li>IndexedDB persists manifests, drafts, and handovers.</li><li>Each handover has a unique client ID and payload hash.</li><li>The queue removes a record only after server acknowledgment.</li></ol><h2 class="check">Verified</h2><p>12 integration tests, real browser offline reload/reconnect, PostgreSQL workflow, and complete Docker Compose startup.</p><small>Source: backend/server.py · backend/domain.py · api/index.py<br>Documentation: docs/ARCHITECTURE.md · docs/DATA_MODEL.md</small></section><section><h2>Actual API evidence validation</h2><pre>${code}</pre></section></div></body></html>`;
 }
 (async () => {
   try {
@@ -276,3 +277,4 @@ function architecture() {
     server.kill();
   }
 })();
+
