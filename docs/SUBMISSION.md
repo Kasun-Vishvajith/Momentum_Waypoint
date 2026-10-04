@@ -16,13 +16,13 @@ Booklet deadline: **Sunday, October 4, 2026 at 11:59 PM Sri Lanka time**. Code p
 
 ## External deliverables — fill only after completion
 
-- [ ] Push a GitHub monorepo named `Momentum_Waypoint`.
+- [x] Push a GitHub monorepo named `Momentum_Waypoint`.
 - [ ] Deploy the complete system to a public HTTPS URL and verify the deployed walkthrough.
 - [ ] Record/upload a five-to-eight-minute unlisted YouTube video with actual working flows and architecture explanation.
 - [ ] Submit repository URL, deployment URL, four account credentials, and YouTube URL through the form.
 - [ ] Keep deployment alive through review and subsequent rounds if advanced.
 
-Repository URL: **pending**
+Repository URL: https://github.com/Kasun-Vishvajith/Momentum_Waypoint
 
 Public application URL: **pending**
 

@@ -4,7 +4,7 @@ Verified on October 4, 2026 using the bundled Python runtime and Playwright with
 
 ## Local integration tests — passed
 
-11 tests cover:
+12 tests cover:
 
 - Full dispatcher → loader → driver → store workflow and depot return.
 - Delivery retry/idempotency and rejection of conflicting records.
@@ -39,6 +39,7 @@ The reproducible test is `tests/browser-check.cjs`. Screenshots and machine-read
 
 ## Checks requiring external infrastructure
 
-Docker Desktop and a PostgreSQL service are not installed in the local execution environment, so the local runs use SQLite. GitHub Actions is configured to exercise PostgreSQL and `docker compose up --build -d --wait`; update this report with its actual result after the repository is pushed. A valid configuration alone is not a claimed Docker runtime pass.
+Docker Desktop and a PostgreSQL service are not installed locally, so local runs use SQLite. **GitHub Actions passed** the PostgreSQL seed/four-role/idempotency workflow, Compose configuration validation, complete `docker compose up --build -d --wait`, and HTTP health check. [Verified run](https://github.com/Kasun-Vishvajith/Momentum_Waypoint/actions/runs/37182626297), implementation commit `8cb496a`.
 
 Public deployment, HTTPS-origin offline behavior, hosting persistence/restarts, and the narrated YouTube video must be verified against their actual external artifacts. See `docs/SUBMISSION.md` for status and links. No public hosting or video completion is claimed solely from local verification.
+

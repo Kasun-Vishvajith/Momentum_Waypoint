@@ -4,5 +4,6 @@ var
 tests
 test-results
 node_modules
+.tools
 __pycache__
 submission

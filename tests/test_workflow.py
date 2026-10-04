@@ -1,5 +1,6 @@
 import copy
 import hashlib
+import importlib.util
 import json
 import os
 import shutil
@@ -207,5 +208,27 @@ class WorkflowTests(unittest.TestCase):
             with transaction() as db:seed(db)
             self.assertEqual(self.state()['trips'][0]['status'],'Published')
         finally:server.shutdown();server.server_close();thread.join()
+
+    def test_vercel_adapter_routes_and_refuses_ephemeral_database(self):
+        spec=importlib.util.spec_from_file_location('waypoint_vercel',Path(__file__).resolve().parents[1]/'api'/'index.py')
+        adapter=importlib.util.module_from_spec(spec);spec.loader.exec_module(adapter)
+        server=ThreadingHTTPServer(('127.0.0.1',0),adapter.handler)
+        thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
+        base=f'http://127.0.0.1:{server.server_port}/api/index?route='
+        opener=urllib.request.build_opener(urllib.request.HTTPCookieProcessor(CookieJar()))
+        original_postgres=os.environ.pop('POSTGRES_URL',None)
+        try:
+            with self.assertRaises(urllib.error.HTTPError) as exc:opener.open(base+'health')
+            self.assertEqual(exc.exception.code,503)
+            self.assertFalse(adapter._ready)
+            # Simulate an already initialized worker; exercise actual API with test SQL.
+            adapter._ready=True
+            payload=json.dumps({'username':'store','password':'demo123'}).encode()
+            req=urllib.request.Request(base+'login',data=payload,headers={'Content-Type':'application/json','X-Requested-With':'Waypoint'})
+            with opener.open(req) as response:self.assertEqual(json.load(response)['user']['role'],'store')
+            with opener.open(base+'state') as response:self.assertTrue(all(o['outlet_id']=='OUT002' for o in json.load(response)['orders']))
+        finally:
+            if original_postgres is not None:os.environ['POSTGRES_URL']=original_postgres
+            server.shutdown();server.server_close();thread.join()
 
 if __name__=='__main__':unittest.main()
