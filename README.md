@@ -72,7 +72,7 @@ Use separate browser profiles/incognito windows to keep multiple accounts signed
 
 ## Configuration and deployment
 
-See [deployment instructions](docs/DEPLOYMENT.md). `render.yaml` defines a Render web service and managed PostgreSQL database. A host with Docker can also run the same Compose stack behind an HTTPS proxy. Set `COOKIE_SECURE=true` for public HTTPS. Offline caching requires HTTPS or localhost. Do not deploy the frontend alone to a static host: the API and database are necessary.
+See [deployment instructions](docs/DEPLOYMENT.md). **Vercel + PostgreSQL through its Marketplace** is the primary deployment path, using `vercel.json` and `api/index.py`. Serverless mode requires a persistent PostgreSQL connection and refuses ephemeral SQLite. `render.yaml` remains an optional alternative. A host with Docker can also run the same Compose stack behind an HTTPS proxy. Set `COOKIE_SECURE=true` for public HTTPS. Offline caching requires HTTPS or localhost. Deploy the API and database alongside the frontend.
 
 This repository does not claim a deployment URL or YouTube video until those external artifacts exist. Complete [the submission checklist](docs/SUBMISSION.md) before submitting the competition form.
 
@@ -90,6 +90,7 @@ The integration tests run against a disposable SQLite database and cover four-ro
 
 ```text
 backend/       API, authentication, SQL adapter, seed, planning validation
+api/           Vercel Python Function entry point
 frontend/      Responsive application, service worker, IndexedDB persistence
 data/          Five supplied CSVs, preserved from the Designathon reference data
 docs/          Architecture, data model, AI disclosure, deployment, video script
@@ -97,6 +98,7 @@ tests/         Workflow/constraint integration tests and browser verification
 compose.yaml   Complete application + PostgreSQL stack
 .env.example   Configuration reference
 render.yaml    Public hosting blueprint
+vercel.json    Vercel functions and static routing
 ```
 
 Health endpoint: `/api/health`. Seed data and service/distance calculations are synthetic competition data. The four judge passwords are intentionally shared demonstration credentials; do not use this fixture for real business operations without changing account provisioning and operational policies.

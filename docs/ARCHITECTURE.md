@@ -16,7 +16,7 @@ flowchart LR
   Seed --> SQL
 ```
 
-The frontend uses the Day 5 HTML/CSS identity and plain JavaScript. The API serves it on the same origin: no cross-origin cookies or separate frontend deployment are required. The standard-library Python HTTP service keeps the Hackathon stack small and inspectable; a managed TLS proxy fronts public deployments. PostgreSQL is the deployment database. SQLite is a dependency-free development/test adapter using the same SQL schema and domain commands.
+The frontend uses the Day 5 HTML/CSS identity and plain JavaScript. Assets and API share one origin: no cross-origin cookies are required. Vercel's Python Function adapter reuses the same API handler and domain commands as the Docker web service. PostgreSQL through the Vercel Marketplace is the public deployment database. Serverless mode refuses ephemeral SQLite. SQLite remains a dependency-free local development/test adapter using the same SQL schema. A managed TLS proxy fronts public deployments.
 
 Every mutation runs in a transaction. PostgreSQL advisory transaction locks serialize mutations across service replicas; SQLite uses an immediate transaction and a process lock. Draft runs also carry a version so stale browser edits return a conflict. This is intentionally conservative for a 60-vehicle competition workload; it trades peak write throughput for easy-to-audit allocation consistency.
 

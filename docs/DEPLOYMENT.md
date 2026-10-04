@@ -1,6 +1,19 @@
 # Public deployment
 
-The repository includes a Docker image, a local PostgreSQL Compose stack, and a Render Blueprint. These are deployable configurations; a public URL must be obtained from a real hosting account before submission.
+The primary hosting path is **Vercel with PostgreSQL through its Marketplace**. The repository includes a Vercel Python Function adapter, a Docker image, and a local PostgreSQL Compose stack. A public URL must be verified against a real deployment before submission. Render remains an optional alternative; no Render account is required.
+
+## Vercel — recommended for the team's existing account
+
+1. Import the GitHub `Momentum_Waypoint` repository as a **new Vercel project**, preserving the existing static Designathon deployment.
+2. Select framework preset **Other** and repository root `.`. The included `vercel.json` serves `frontend/` and routes `/api/*` to the Python Function in `api/index.py`. Leave Build Command unset; the runtime installs root `requirements.txt`.
+3. In the project's **Storage** area, choose **Create Database → Neon (PostgreSQL)** from the Marketplace. Review the available plan and terms; a new integration/account or paid plan needs the owner's approval. An existing compatible PostgreSQL database can also be connected.
+4. Connect the database to the project. Ensure Production has `DATABASE_URL` set to its PostgreSQL connection string. The adapter also recognizes `POSTGRES_URL` if that is the injected variable. Keep credentials in Vercel environment settings, never source or chat.
+5. Set `COOKIE_SECURE=true`, `SEED_PASSWORD=demo123`, and `DEMO_CLOCK=2026-06-23T15:00:00+05:30` for the repeatable supplied-data walkthrough.
+6. Redeploy after connecting the database. The first API call creates schema and seeds it transactionally. Subsequent cold starts preserve data. Serverless mode refuses to use SQLite, preventing accidental ephemeral operational storage.
+7. Verify `/api/health`, all four account sign-ins, published plan sharing, a real offline reload, and reconnect synchronization on the public HTTPS URL. Ensure deployment protection does not block external judges from the Production URL.
+8. Keep the project and database available throughout review and subsequent rounds if advanced. Monitor free-tier capacity if selecting a free plan; quota exhaustion can interrupt judging.
+
+Official references: [Vercel Python Functions](https://vercel.com/docs/functions/runtimes/python), [Postgres on Vercel](https://vercel.com/docs/postgres), and [Neon Marketplace integration](https://vercel.com/marketplace/neon). Vercel routes the API and browser assets on one origin, so cookie authentication and offline service-worker scope continue to work.
 
 ## Render Blueprint
 

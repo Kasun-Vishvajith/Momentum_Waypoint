@@ -32,7 +32,7 @@ class DB:
         if self.postgres:
             import psycopg
             from psycopg.rows import dict_row
-            self.conn = psycopg.connect(url, row_factory=dict_row)
+            self.conn = psycopg.connect(url, row_factory=dict_row, connect_timeout=10, prepare_threshold=None)
         else:
             path = Path(os.getenv('SQLITE_PATH', str(ROOT / 'var' / 'waypoint.db')))
             path.parent.mkdir(parents=True, exist_ok=True)

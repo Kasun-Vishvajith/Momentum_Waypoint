@@ -20,6 +20,7 @@ from seed import seed, password_matches
 
 LOG = logging.getLogger('waypoint')
 FRONTEND = ROOT / 'frontend'
+LOGIN_ATTEMPTS = {}
 
 def require_role(user, *roles):
     if user['role'] not in roles:
@@ -438,7 +439,7 @@ class Handler(BaseHTTPRequestHandler):
                 if path == '/api/login':
                     # Per-process throttling; also keep the service behind a host's proxy.
                     key = self.client_address[0]
-                    attempts = self.server.login_attempts.setdefault(key,[])
+                    attempts = LOGIN_ATTEMPTS.setdefault(key,[])
                     attempts[:] = [t for t in attempts if t > time.time()-60]
                     if len(attempts)>=15:
                         raise Problem('Too many sign-in attempts. Wait one minute and try again.',429)
