@@ -282,7 +282,7 @@ textarea {
   padding-top: 20px;
   border-top: 1px solid var(--line);
 }
-.login-credentials h2 {
+.login-credentials summary {
   font-size: 16px;
   margin: 0 0 12px;
 }
@@ -570,3 +570,4 @@ button.busy {
     scroll-behavior: auto;
   }
 }
+

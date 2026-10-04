@@ -247,7 +247,7 @@ function meta(o) {
   return `<div class="order-meta"><span>${o.units} crates</span><span>${o.weight} kg</span><span>${o.volume} m³</span><span>${esc(o.temperature)}</span></div><details><summary>Handling and references</summary>${pair("Order", o.id)}${pair("Depot", r.depot)}${pair("Receiving window", r.window_open_time + "–" + r.window_close_time + " SLT")}${pair("Access", r.parking_constraint.replaceAll("_", " "))}${pair("Unloading", r.dock_type.replaceAll("_", " "))}</details>`;
 }
 function loginView() {
-  return `<main class="login" id="main"><section class="login-left"><a class="brand" href="#"><img src="assets/mark.svg" alt="">Waypoint</a><h1>Good to have you here.</h1><p>One place to plan, deliver, and keep everyone informed.</p><form id="login-form"><div class="field"><label for="username">Username</label><input id="username" name="username" autocomplete="username" required maxlength="40"></div><div class="field"><label for="password">Password</label><input id="password" name="password" type="password" autocomplete="current-password" required maxlength="200"></div><p class="form-error" id="login-error" role="alert"></p><button class="btn primary" type="submit">Sign in ${icon("arrow")}</button></form><section class="login-credentials" aria-labelledby="credentials-title"><h2 id="credentials-title">Demo sign-in credentials</h2><table><thead><tr><th scope="col">Role</th><th scope="col">Username</th><th scope="col">Password</th></tr></thead><tbody>${[
+  return `<main class="login" id="main"><section class="login-left"><a class="brand" href="#"><img src="assets/mark.svg" alt="">Waypoint</a><h1>Good to have you here.</h1><p>One place to plan, deliver, and keep everyone informed.</p><form id="login-form"><div class="field"><label for="username">Username</label><input id="username" name="username" autocomplete="username" required maxlength="40"></div><div class="field"><label for="password">Password</label><input id="password" name="password" type="password" autocomplete="current-password" required maxlength="200"></div><p class="form-error" id="login-error" role="alert"></p><button class="btn primary" type="submit">Sign in ${icon("arrow")}</button></form><details class="login-credentials"><summary>Demo sign-in credentials</summary><table><thead><tr><th scope="col">Role</th><th scope="col">Username</th><th scope="col">Password</th></tr></thead><tbody>${[
     ["store", "Store"],
     ["dispatch", "Dispatcher"],
     ["loader", "Loader"],
@@ -259,7 +259,7 @@ function loginView() {
     )
     .join(
       "",
-    )}</tbody></table></section></section><section class="login-art"><h2>Less chasing.<br>More certainty.</h2><img src="assets/route-art.svg" alt="Connected delivery checkpoints and a van"><p>From the first order to the final receipt, your team knows what comes next.</p><div class="trip-stages"><span>Plan clearly</span><span>Deliver confidently</span><span>Close the loop</span></div></section></main>`;
+    )}</tbody></table></details></section><section class="login-art"><h2>Less chasing.<br>More certainty.</h2><img src="assets/route-art.svg" alt="Connected delivery checkpoints and a van"><p>From the first order to the final receipt, your team knows what comes next.</p><div class="trip-stages"><span>Plan clearly</span><span>Deliver confidently</span><span>Close the loop</span></div></section></main>`;
 }
 function render() {
   if (!D) {
@@ -1128,3 +1128,4 @@ async function boot() {
   }, 15000);
 }
 boot();
+
