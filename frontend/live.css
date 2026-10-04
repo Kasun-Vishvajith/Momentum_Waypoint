@@ -277,9 +277,33 @@ textarea {
 .login-left p {
   max-width: 60ch;
 }
-.demo-accounts button {
+.login-credentials {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+.login-credentials h2 {
+  font-size: 16px;
+  margin: 0 0 12px;
+}
+.login-credentials table {
+  width: 100%;
+  border-collapse: collapse;
   font-size: 13px;
-  min-height: 40px;
+}
+.login-credentials th,
+.login-credentials td {
+  padding: 10px 4px;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+}
+.login-credentials thead th {
+  color: var(--muted);
+  font-size: 12px;
+}
+.login-credentials code {
+  font-size: 13px;
+  user-select: all;
 }
 .login-art p {
   font-size: 16px;
