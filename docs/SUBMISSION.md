@@ -24,7 +24,7 @@ Booklet deadline: **Sunday, October 4, 2026 at 11:59 PM Sri Lanka time**. Code p
 
 Repository URL: https://github.com/Kasun-Vishvajith/Momentum_Waypoint
 
-Public application URL: **pending**
+Public application URL: https://momentum-waypoint.vercel.app — frontend deployed; PostgreSQL connection and live walkthrough verification pending.
 
 Unlisted YouTube URL: **pending**
 

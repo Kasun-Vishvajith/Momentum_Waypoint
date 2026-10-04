@@ -17,6 +17,7 @@ Verified on October 4, 2026 using the bundled Python runtime and Playwright with
 - Stale draft versions, invalid sequence rollback, raster evidence validation.
 - HttpOnly/SameSite cookies, unauthenticated requests, CSRF header rejection.
 - Restart/startup seed preserves existing operational records.
+- Vercel adapter rewrites API routes and refuses an ephemeral database fallback.
 
 JavaScript syntax checks passed for the application and service worker.
 
@@ -39,7 +40,8 @@ The reproducible test is `tests/browser-check.cjs`. Screenshots and machine-read
 
 ## Checks requiring external infrastructure
 
-Docker Desktop and a PostgreSQL service are not installed locally, so local runs use SQLite. **GitHub Actions passed** the PostgreSQL seed/four-role/idempotency workflow, Compose configuration validation, complete `docker compose up --build -d --wait`, and HTTP health check. [Verified run](https://github.com/Kasun-Vishvajith/Momentum_Waypoint/actions/runs/37182626297), implementation commit `8cb496a`.
+Docker Desktop and a PostgreSQL service are not installed locally, so local runs use SQLite. **GitHub Actions passed** the PostgreSQL seed/four-role/idempotency workflow, Compose configuration validation, complete `docker compose up --build -d --wait`, and HTTP health check. [Verified run](https://github.com/Kasun-Vishvajith/Momentum_Waypoint/actions/runs/37184216311), implementation commit `0f2946b`.
 
 Public deployment, HTTPS-origin offline behavior, hosting persistence/restarts, and the narrated YouTube video must be verified against their actual external artifacts. See `docs/SUBMISSION.md` for status and links. No public hosting or video completion is claimed solely from local verification.
+
 

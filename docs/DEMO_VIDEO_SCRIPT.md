@@ -1,5 +1,7 @@
 # Hackathon video script — target 6 minutes 45 seconds
 
+The reproducible narrated local draft uses `docs/VIDEO_NARRATION.json` and `tests/record-demo.cjs` and targets 7 minutes 34 seconds. Review it and upload it as unlisted; the shorter outline below is an alternative for a team-recorded video.
+
 Record the actual running application at a readable desktop size; show the loader and driver at phone width. Upload the narrated result to YouTube as **unlisted**. A script is not a submitted video.
 
 | Time | Screen and narration |
@@ -14,3 +16,4 @@ Record the actual running application at a readable desktop size; show the loade
 | 6:20–6:45 | Explain transparent travel assumptions and AI assistance. State the public URL, source repository, credentials, and that the deployment stays live for review. |
 
 Capture only working behavior. Do not say GPS, live traffic, ML predictions, all-stack Docker verification, or cloud deployment is complete unless you have demonstrated it. Keep staging/reset work outside the video; use a fresh disposable database to make the recording repeatable.
+
