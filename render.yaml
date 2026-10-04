@@ -1,0 +1,24 @@
+# Render Blueprint: application + managed PostgreSQL on the same private network.
+# Paid instances avoid web-service sleeping and temporary database expiration.
+databases:
+  - name: waypoint-db
+    databaseName: waypoint
+    user: waypoint
+    plan: 0.1c-256mb
+services:
+  - type: web
+    name: momentum-waypoint
+    runtime: docker
+    plan: 0.5c-512mb
+    healthCheckPath: /api/health
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: waypoint-db
+          property: connectionString
+      - key: COOKIE_SECURE
+        value: "true"
+      - key: SEED_PASSWORD
+        value: demo123
+      - key: DEMO_CLOCK
+        value: "2026-06-23T15:00:00+05:30"

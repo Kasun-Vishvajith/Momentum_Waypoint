@@ -1,0 +1,7 @@
+# AI tool disclosure
+
+This Hackathon implementation was AI-assisted using OpenAI Codex. Assistance covered reading the competition brief and Designathon source, planning the architecture, writing backend/frontend code, creating the SQL schema and reference seed, implementing constraint calculations, producing tests, diagnosing test failures, and drafting setup, deployment, and submission documentation. Existing Day 5 assets and styles were reused for continuity. Official hosting documentation was consulted to verify deployment configuration.
+
+AI-generated implementation decisions and calculations are documented explicitly, including the fixed fixture clock, district travel approximations, monsoon buffer, indivisible orders, and use of manual allocation with validation. No interviews, user studies, real telemetry, trained predictive models, or independently performed research are claimed.
+
+The team's provided Designathon materials establish the submitted product direction and visual design. The team should review the resulting source, walkthrough, verification report, and video before submitting. Team members remain responsible for the final deliverables and for adding any additional tools or human contributions that occurred outside this recorded implementation session. Deployment/account actions and recording an actual narrated video are separate deliverables; do not claim completion unless they exist.

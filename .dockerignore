@@ -1,0 +1,8 @@
+.git
+.env
+var
+tests
+test-results
+node_modules
+__pycache__
+submission

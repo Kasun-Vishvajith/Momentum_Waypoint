@@ -1,0 +1,30 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: waypoint
+      POSTGRES_USER: waypoint
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-waypoint-local-only}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U waypoint -d waypoint"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+  app:
+    build: .
+    ports:
+      - "${APP_PORT:-8000}:8000"
+    environment:
+      DATABASE_URL: postgresql://waypoint:${POSTGRES_PASSWORD:-waypoint-local-only}@db:5432/waypoint
+      SEED_PASSWORD: ${SEED_PASSWORD:-demo123}
+      DEMO_CLOCK: ${DEMO_CLOCK:-2026-06-23T15:00:00+05:30}
+      COOKIE_SECURE: ${COOKIE_SECURE:-false}
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+volumes:
+  postgres_data:
